@@ -23,7 +23,7 @@ export function getTableTitles($$: CheerioAPI, table: Cheerio<Element>) {
   return titles;
 }
 
-export function getTableStockInfo($$: CheerioAPI, table: Cheerio<Element>) {
+export function getTableStockInfo($$: CheerioAPI, table: Cheerio<Element>): string[][] {
   const titles = getTableTitles($$, table);
   const itemInfos: string[][] = [];
   let itemRowInfo: string[] = [];
@@ -46,10 +46,21 @@ export function getTableStockInfo($$: CheerioAPI, table: Cheerio<Element>) {
   return itemInfos;
 }
 
-export function getTableStockInfoJson($$: CheerioAPI, table: Cheerio<Element>) {
-  const titles = getTableTitles($$, table);
-  const itemInfos: string[][] = [];
-  let itemRowInfo: any[] = [];
+function checkDupTitleKey(titles: string[]) {
+  return titles.reduce((newTitles: string[], title) => {
+    if (newTitles.includes(title)) {
+      newTitles.push(`${title}_1`);
+    } else {
+      newTitles.push(title);
+    }
+    return newTitles;
+  }, []);
+}
+
+export function getTableStockInfoJson<T>($$: CheerioAPI, table: Cheerio<Element>): T[] {
+  const titles = checkDupTitleKey(getTableTitles($$, table));
+  const itemInfos: any[] = [];
+  let itemRowInfo: { [x: string]: string } = {};
   $$(table)
     .find("tr > .no")
     .each((_, element) => {
@@ -58,11 +69,10 @@ export function getTableStockInfoJson($$: CheerioAPI, table: Cheerio<Element>) {
         .parent()
         .find("td")
         .each((index, elem) => {
-          const key = titles[index];
-          itemRowInfo.push({ [key]: $$(elem).text().trim() });
+          itemRowInfo[titles[index]] = $$(elem).text().trim();
         });
       itemInfos.push(itemRowInfo);
-      itemRowInfo = [];
+      itemRowInfo = {};
     });
   return itemInfos;
 }
