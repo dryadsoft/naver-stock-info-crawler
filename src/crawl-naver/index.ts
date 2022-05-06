@@ -1,4 +1,15 @@
-import { Cheerio, CheerioAPI, Element } from "cheerio";
+import { Cheerio, CheerioAPI, Element, load } from "cheerio";
+import { getDecodedPage } from "../utils";
+
+export async function getNaverTableTag(
+  url: string,
+  timeout = 3000
+): Promise<{ $$: CheerioAPI; table: Cheerio<Element> }> {
+  const content = await getDecodedPage(url, timeout);
+  const $$ = load(content);
+  const table = $$(".box_type_l > table").first();
+  return { $$, table };
+}
 
 export function getTableTitles($$: CheerioAPI, table: Cheerio<Element>) {
   const titles: string[] = [];

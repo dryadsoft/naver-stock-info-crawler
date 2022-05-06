@@ -1,6 +1,7 @@
 import axios, { AxiosResponseHeaders } from "axios";
 import iconv from "iconv-lite";
 import fs from "fs";
+
 async function customAxios(url: string, timeout: number) {
   const source = axios.CancelToken.source();
   setTimeout(() => {
@@ -16,7 +17,7 @@ async function customAxios(url: string, timeout: number) {
   });
 }
 
-export async function getPage(url: string, timeout = 3000) {
+export async function getDecodedPage(url: string, timeout: number): Promise<string> {
   try {
     const res = await customAxios(url, timeout);
     if (res.status === 200) {
@@ -39,7 +40,7 @@ function getPageEncoding(headers: AxiosResponseHeaders) {
   return "utf-8";
 }
 
-function fnMakeHtml(html: any) {
+export function fnMakeHtml(html: any) {
   fs.writeFile("page2.html", html, "utf-8", function (e: any) {
     if (e) {
       console.log(e);

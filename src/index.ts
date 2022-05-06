@@ -1,4 +1,4 @@
-import { load } from "cheerio";
+import { getTableStockInfo, getTableStockInfoJson } from "./crawl-naver";
 import {
   fetchSearchTopStock,
   fetchSiseFall,
@@ -6,9 +6,8 @@ import {
   fetchSiseLowUp,
   fetchSiseRise,
   fetchSiseSteady,
-} from "./fetch";
+} from "./fetch/fetch";
 import { Ouptput } from "./index.interface";
-import { getTableStockInfo, getTableStockInfoJson, getTableTitles } from "./naver-finance";
 
 /**
  * 검색상위종목
@@ -16,11 +15,8 @@ import { getTableStockInfo, getTableStockInfoJson, getTableTitles } from "./nave
  */
 async function searchTopStock(): Promise<Ouptput> {
   try {
-    const content = await fetchSearchTopStock();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSearchTopStock();
     const stockInfos = getTableStockInfo($$, table);
-
     return {
       ok: true,
       data: stockInfos,
@@ -39,11 +35,8 @@ async function searchTopStock(): Promise<Ouptput> {
  */
 async function siseLowUp(): Promise<Ouptput> {
   try {
-    const content = await fetchSiseLowUp();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSiseLowUp();
     const stockInfos = getTableStockInfoJson($$, table);
-
     return {
       ok: true,
       data: stockInfos,
@@ -55,18 +48,14 @@ async function siseLowUp(): Promise<Ouptput> {
     };
   }
 }
-
 /**
- * 고갸대비급락
+ * 고가대비급락
  * @returns
  */
 async function siseHighDown(): Promise<Ouptput> {
   try {
-    const content = await fetchSiseHighDown();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSiseHighDown();
     const stockInfos = getTableStockInfo($$, table);
-
     return {
       ok: true,
       data: stockInfos,
@@ -83,11 +72,8 @@ async function siseHighDown(): Promise<Ouptput> {
  */
 async function SiseRise() {
   try {
-    const content = await fetchSiseRise();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSiseRise();
     const stockInfos = getTableStockInfo($$, table);
-
     return {
       ok: true,
       data: stockInfos,
@@ -99,17 +85,13 @@ async function SiseRise() {
     };
   }
 }
-
 /**
  * 보합
  */
 async function SiseSteady() {
   try {
-    const content = await fetchSiseSteady();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSiseSteady();
     const stockInfos = getTableStockInfo($$, table);
-
     return {
       ok: true,
       data: stockInfos,
@@ -121,17 +103,13 @@ async function SiseSteady() {
     };
   }
 }
-
 /**
  * 하락
  */
 async function SiseFall() {
   try {
-    const content = await fetchSiseFall();
-    const $$ = load(content);
-    const table = $$(".box_type_l > table").first();
+    const { $$, table } = await fetchSiseFall();
     const stockInfos = getTableStockInfo($$, table);
-
     return {
       ok: true,
       data: stockInfos,
