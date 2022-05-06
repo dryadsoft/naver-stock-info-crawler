@@ -1,10 +1,37 @@
 {
   "name": "naver-stock-info-crawler",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "author": {
+    "name": "dryadsoft",
+    "email": "dryadsoft@gmail.com",
+    "url": "https://github.com/dryadsoft/naver-stock-info-crawler"
+  },
   "license": "MIT",
+  "description": "Node.js를 이용한 네이버 주식정보 크롤링하기",
+  "keywords": [
+    "node.js",
+    "node",
+    "주식",
+    "주식정보",
+    "클롤링"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dryadsoft/naver-stock-info-crawler"
+  },
+  "homepage": "https://github.com/dryadsoft/naver-stock-info-crawler",
+  "bugs": {
+    "url": "https://github.com/dryadsoft/naver-stock-info-crawler/issues",
+    "email": "dryadsoft@gmail.com"
+  },
   "scripts": {
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node lib/index.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
