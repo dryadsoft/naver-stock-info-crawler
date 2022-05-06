@@ -247,11 +247,3 @@ export async function SiseFallJson(): Promise<CommonOuptputJson<ISiseFall>> {
     };
   }
 }
-
-(async () => {
-  const { ok, error, data } = await siseLowUpJson();
-  if (data) {
-    // console.log(data[0].등락률);
-    console.log(data[0]);
-  }
-})();
