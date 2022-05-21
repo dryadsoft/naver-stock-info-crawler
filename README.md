@@ -21,27 +21,27 @@ $ yarn add naver-stock-info-crawler
 
 ```typescript
 /* 검색상위종목 */
-const { ok, error, data } = await searchTopStock;
+const { ok, error, data } = await searchTopStock();
 /* 검색상위종목 */
-const { ok, error, data } = await searchTopStockJson;
+const { ok, error, data } = await searchTopStockJson();
 /* 저가대비 급등 */
-const { ok, error, data } = await siseLowUp;
+const { ok, error, data } = await siseLowUp();
 /* 저가대비 급등 */
-const { ok, error, data } = await siseLowUpJson;
+const { ok, error, data } = await siseLowUpJson();
 /* 고가대비급락 */
-const { ok, error, data } = await siseHighDown;
+const { ok, error, data } = await siseHighDown();
 /* 고가대비급락 */
-const { ok, error, data } = await siseHighDownJson;
+const { ok, error, data } = await siseHighDownJson();
 /* 상승 */
-const { ok, error, data } = await SiseRise;
+const { ok, error, data } = await SiseRise();
 /* 상승 */
-const { ok, error, data } = await SiseRiseJson;
+const { ok, error, data } = await SiseRiseJson();
 /* 보합 */
-const { ok, error, data } = await SiseSteady;
+const { ok, error, data } = await SiseSteady();
 /* 보합 */
-const { ok, error, data } = await SiseSteadyJson;
+const { ok, error, data } = await SiseSteadyJson();
 /* 하락 */
-const { ok, error, data } = await SiseFall;
+const { ok, error, data } = await SiseFall();
 /* 하락 */
-const { ok, error, data } = await SiseFallJson;
+const { ok, error, data } = await SiseFallJson();
 ```
