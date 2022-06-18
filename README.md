@@ -45,3 +45,11 @@ const { ok, error, data } = await SiseFall();
 /* 하락 */
 const { ok, error, data } = await SiseFallJson();
 ```
+
+## Resources
+
+- [CHANGELOG](https://github.com/dryadsoft/naver-stock-info-crawler/blob/master/CHANGELOG.md)
+
+## License
+
+[MIT](LICENSE)
